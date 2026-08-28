@@ -1,0 +1,6 @@
+# dsh-guardian bundle patch: add the safety host row.
+# The client half is picked up automatically from this package's `dsh.client`
+# declaration once this host row exists in the loader.
+- insert:
+    - id: dsh-guardian
+      name: dsh-guardian
