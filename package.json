@@ -1,5 +1,5 @@
 {
-  "name": "dsh-guardian",
+  "name": "dsh-edit-guardian",
   "version": "0.1.0",
   "description": "DSH plugin: file-change diff bar for write/edit/str_replace_editor, and a dangerous-command approval gate for bash/pwsh",
   "type": "module",

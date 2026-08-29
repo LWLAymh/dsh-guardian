@@ -13,31 +13,58 @@ global.window = {
           return {
             DiffBlock: (p) => ({ type: "DiffBlock", props: p }),
             IconEditOutline16: (p) => ({ type: "IconEditOutline16", props: p }),
+            IconApiOutline14: (p) => ({ type: "IconApiOutline14", props: p }),
+            IconChevronDownOutline14: (p) => ({ type: "IconChevronDownOutline14", props: p }),
+            StateDot: (p) => ({ type: "StateDot", props: p }),
+            TerminalBlock: (p) => ({ type: "TerminalBlock", props: p }),
           };
         }
         if (name === "@deepseek-ai/dsh-client-runtime/client") {
-          return { abbreviateHomePath: (t, h) => t };
+          return {
+            abbreviateHomePath: (t, h) => t,
+            isAppendSurfaceEvent: () => true,
+          };
         }
         throw new Error("unexpected require: " + name);
       };
       const plugin = reg.factory(stubRequire);
       console.log("plugin type:", typeof plugin);
       console.log("plugin.inject:", JSON.stringify(plugin.inject));
+
+      const conversationEvents = {
+        register(def) {
+          console.log("conversationEvents.register:", def.kind);
+        },
+      };
       const slots = {
         inject(name, fn) {
           console.log("slots.inject", name);
-          const it = fn();
-          let step;
-          while (!(step = it.next()).done) {
-            step.value; // disposer
+          const result = fn();
+          if (result && typeof result.next === "function") {
+            let step;
+            while (!(step = result.next()).done) {
+              const dispose = step.value;
+              console.log("registered:", dispose && dispose.options ? JSON.stringify(dispose.options) : "disposer");
+            }
+          } else {
+            console.log("registered disposer");
           }
         },
         register(options, comp) {
           console.log("register options:", JSON.stringify(options), "comp:", comp.name);
-          return () => {};
+          return { options };
         },
       };
-      plugin.apply({ slots });
+      const ctx = {
+        get(name) {
+          if (name === "remote.commands") return { execute: (sid, line) => Promise.resolve({ ok: true, line, sid }) };
+          return undefined;
+        },
+        remote: { commands: { execute: (sid, line) => Promise.resolve({ ok: true, line, sid }) } },
+        conversationEvents,
+        slots,
+      };
+      plugin.apply(ctx);
     },
   },
 };
