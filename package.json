@@ -1,7 +1,7 @@
 {
   "name": "dsh-edit-guardian",
   "version": "0.1.0",
-  "description": "DSH plugin: file-change diff bar for write/edit/str_replace_editor, and a dangerous-command approval gate for bash/pwsh",
+  "description": "DSH plugin: file-change diff bar with keep/undo summary, and a dangerous-command approval gate with red highlighting for bash/pwsh",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
@@ -15,6 +15,7 @@
   },
   "files": [
     "lib",
+    "assets",
     "cordis.patch.yml",
     "dsh.plugin.json",
     "README.md",

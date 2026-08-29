@@ -63,6 +63,12 @@
 
 模式是简单的正则匹配，因此只是提到 `rm` 的无害命令（例如 `echo "rm -rf"`）也可能触发审批。这是刻意为之：拿不准就先问。想跳过提示就切到 `Full access`。
 
+## 截图
+
+| 文件更改汇总 | 危险命令审批 |
+|---|---|
+| ![文件更改汇总](assets/file-change-summary.png) | ![危险命令审批](assets/dangerous-command-approval.png) |
+
 ## 安装
 
 安装到 web profile：

@@ -63,6 +63,12 @@ Fail-closed: if the user rejects, cancels, or no approval channel is available, 
 
 Patterns are simple regular expressions, so harmless commands that merely mention `rm` (for example `echo "rm -rf"`) may also prompt. This is intentional: when in doubt, ask. Use the `Full access` preset to skip prompts.
 
+## Screenshots
+
+| File-change summary | Dangerous-command approval |
+|---|---|
+| ![File-change summary](assets/file-change-summary.png) | ![Dangerous-command approval](assets/dangerous-command-approval.png) |
+
 ## Installation
 
 Install into your web profile:
