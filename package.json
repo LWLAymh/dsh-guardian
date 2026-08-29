@@ -16,6 +16,7 @@
   "files": [
     "lib",
     "assets",
+    "screenshots.json",
     "cordis.patch.yml",
     "dsh.plugin.json",
     "README.md",
