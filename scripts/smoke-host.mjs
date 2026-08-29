@@ -16,9 +16,9 @@ const commands = {
   },
 };
 const ctx = {
+  commands,
   get(name) {
     if (name === "sandboxPolicy") return sandboxPolicy;
-    if (name === "commands") return commands;
     return undefined;
   },
   on(event, handler) {
